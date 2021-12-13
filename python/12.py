@@ -12,15 +12,17 @@ def find_all_paths(edges, start, end, part2=False):
             return [path]
         paths = []
         for node in get_adjacent_vertices(edges,start):
-            if not part2:
-                # allow visiting small caves only once
-                if not (node in allowed_only_once and node in path):
-                    paths.extend(find_all_subpaths(node, end, path))
-            else:
+            if part2:
                 # allow visiting just one of the small caves twice
                 lowers = [l for l in path if l.islower()]
-                if len(lowers) - len(set(lowers)) <= 1 and not (node in allowed_only_once and path.count(node) == 2) and node != 'start':
-                        paths.extend(find_all_subpaths(node, end, path))
+                if (
+                    len(lowers) - len(set(lowers)) <= 1
+                    and (node not in allowed_only_once or path.count(node) != 2)
+                    and node != 'start'
+                ):
+                    paths.extend(find_all_subpaths(node, end, path))
+            elif not (node in allowed_only_once and node in path):
+                paths.extend(find_all_subpaths(node, end, path))
         return paths
     return find_all_subpaths(start, end, [])
 

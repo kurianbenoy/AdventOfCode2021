@@ -20,7 +20,7 @@ def line_from_endpoints(starts, ends, diagonals=False):
     if is_hor_ver(sx, ex, sy, ey):
         return {(x, y) for x in range(sx, ex+dx, dx) for y in range(sy, ey+dy, dy)}
     elif is_45(sx, ex, sy, ey) and diagonals:
-        return {(x,  y) for x, y in zip(range(sx, ex+dx, dx), range(sy, ey+dy, dy))}
+        return set(zip(range(sx, ex+dx, dx), range(sy, ey+dy, dy)))
     else:
         return set()
 

@@ -40,7 +40,7 @@ def part_2(lowpoints, cave_floor, cave_heights):
 lines = get_input('inputs/09.txt')
 
 cave_floor = []
-cave_heights = dict()
+cave_heights = {}
 for row, line in enumerate(lines):
     for col, height in enumerate(line):
         position = complex(row, col)

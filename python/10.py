@@ -21,13 +21,11 @@ def autocomplete(in_line):
             opens.append(current)
         else:
             last_opened = opens.pop()
-            if current.translate(close_it) == last_opened:
-                pass
-            else:
+            if current.translate(close_it) != last_opened:
                 # incomplete line! return first illegal
                 return current
     # if line is legal we get here and return list of needed closing chars
-    return list(''.join(o for o in reversed(opens)).translate(close_it))
+    return list(''.join(reversed(opens)).translate(close_it))
 
 
 lines = get_input('inputs/10.txt')
