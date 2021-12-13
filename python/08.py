@@ -25,13 +25,8 @@ def is_two(legend, pattern):
 
 
 def decypher(in_patterns):
-    patterns = deque(sorted([pattern for pattern in in_patterns], key=len))
-    legend = dict()
-
-    # 1, 7, 4
-
-    for num in [1, 7, 4]:
-        legend[num] = patterns.popleft()
+    patterns = deque(sorted(list(in_patterns), key=len))
+    legend = {num: patterns.popleft() for num in [1, 7, 4]}
 
     # 8
     legend[8] = patterns.pop()
@@ -48,14 +43,14 @@ def decypher(in_patterns):
 
         elif is_six(legend, pattern):
             legend[6] = pattern
-        
+
     for pattern in patterns:
         if is_five(legend, pattern):
             legend[5] = pattern
         elif is_two(legend, pattern):
             legend[2] = pattern
 
-    return {''.join(c for c in sorted(pattern)): digit for digit, pattern in legend.items()}
+    return {''.join(sorted(pattern)): digit for digit, pattern in legend.items()}
 
 
 data = get_input('inputs/08.txt')
@@ -74,7 +69,7 @@ for patterns, digits in displays:
     solution = ''
     translator = decypher(patterns)
     for code in digits:
-        scode = ''.join(c for c in sorted(code))
+        scode = ''.join(sorted(code))
         solution += str(translator[scode])
     party_2 += int(solution)
 

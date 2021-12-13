@@ -3,13 +3,12 @@ def get_input(file_name, numbers=False, separator='\n'):
     """ Reads in data present in `file_name` separated by `separator` string. """
     with open(file_name) as input_file:
         input_data = input_file.read().split(separator)
-    if numbers:
-        try:
-            return list(map(int, input_data))
-        except:
-            raise ValueError('Unable to convert data into integers')
-    else:
+    if not numbers:
         return input_data
+    try:
+        return list(map(int, input_data))
+    except:
+        raise ValueError('Unable to convert data into integers')
 
 def print_solutions(part_1, part_2 = None):
     print(f'Part 1 solution is: {part_1}')

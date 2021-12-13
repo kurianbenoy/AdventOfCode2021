@@ -36,7 +36,7 @@ def scrubox(data, criterion='most'):
             # keep only those numbers which have bit_value in current column position
             result = [bit for bit in result if bit[column_pos] == bit_value]
     # this works nice even though result is a list of strings ?
-    return ''.join(c for c in result)
+    return ''.join(result)
 
 scrubber = scrubox(data, 'most')
 oxygen = scrubox(data, 'least')
